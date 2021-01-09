@@ -20,10 +20,10 @@ navToggle.addEventListener("click", function(){
     const linksHeight = links.getBoundingClientRect().height;
 
     if(containerHeight === 0){
-        console.log('here');
+        // console.log('here');
         linksContainer.style.height = `${linksHeight}px`;
     }else{
-        console.log('there');
+        // console.log('there');
         linksContainer.style.height = 0;
     }
 
@@ -57,6 +57,7 @@ scrollLinks.forEach(function (link){
         //prevent Default Scroll
         e.preventDefault();
         //navigate to specific spot
+        //slice will remove the hash that we get in id
         const id = e.currentTarget.getAttribute("href").slice(1);
         const element = document.getElementById(id);
         //calculate the heights
@@ -64,8 +65,9 @@ scrollLinks.forEach(function (link){
         const navHeight = navbar.getBoundingClientRect().height;
         const containerHeight = linksContainer.getBoundingClientRect().height;
         const fixedNav = navbar.classList.contains("fixed-nav");
+        
         let position = element.offsetTop - navHeight;
-
+        console.log(position);
         if(!fixedNav){
             position = position - navHeight;
         }
@@ -75,6 +77,7 @@ scrollLinks.forEach(function (link){
         window.scrollTo({
             left:0,
             top:position,
+            behavior: 'smooth',
         });
         linksContainer.style.height = 0;
     });
